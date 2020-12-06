@@ -1,13 +1,13 @@
 class Person
-    attr_accessor :name
+  attr_accessor :name
 
-    def initialize name, age
-        @name = name
-        @age = age
-    end
+  def initialize name, age
+    @name = name
+    @age = age
+  end
 end
 
-person = Person.new('一郎', 10)
+person = Person.new '一郎', 10
 p person
 # #<Person:0x00007ff39f158750 @name="一郎", @age=10>
 
