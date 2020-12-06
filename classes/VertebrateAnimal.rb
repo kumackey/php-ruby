@@ -1,7 +1,7 @@
 class VertebrateAnimal
   class << self
-    def is_vertebrate_animal group
-      get_vertebrate_animal.include?(group)
+    def is_vertebrate_anima group
+      get_vertebrate_animal.include? group
     end
 
     private
