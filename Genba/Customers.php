@@ -5,7 +5,7 @@ class Customers
     /**
      * @var Customer[]
      */
-    private $customers;
+    private array $customers;
 
     /**
      * Customers constructor.
@@ -16,8 +16,17 @@ class Customers
         $this->customers = $customers;
     }
 
-    public function getList()
+    /**
+     * @param Customer $customer
+     * @return Customers
+     */
+    public function add(Customer $customer)
     {
+        $customers = array_merge($this->customers, $customer);
+        return new self($customers);
+    }
+
+    public function asList() {
         return $this->customers;
     }
 }
