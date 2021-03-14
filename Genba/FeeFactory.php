@@ -12,15 +12,13 @@ class FeeFactory
      */
     static function createFeeByName(string $type)
     {
-        if (!FeeType::isValidFeeType($type)) {
-            throw new \http\Exception\InvalidArgumentException();
-        }
+        $type = new FeeType($type);
 
-        if ($type === 'child') {
+        if ($type->isChild()) {
             return new ChildFee();
         }
 
-        if ($type === 'adult') {
+        if ($type->isAdult()) {
             return new AdultFee();
         }
 

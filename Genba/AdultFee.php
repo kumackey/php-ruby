@@ -5,9 +5,6 @@ require_once __DIR__ . '/Yen.php';
 
 class AdultFee implements Fee
 {
-    /**
-     * AdultFee constructor.
-     */
     public function __construct()
     {
     }
