@@ -7,7 +7,7 @@ class State
     const EXECUTED = 'executed';
     const FINISHED = 'finished';
     const REMANDED = 'remanded';
-    const STOPPED = 'stoped';
+    const STOPPED = 'stopped';
 
     private const STATES = [
         self::PENDING,
