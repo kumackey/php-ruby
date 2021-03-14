@@ -1,9 +1,15 @@
 <?php
 
-require_once __DIR__ . '/CustomerType.php';
-require_once __DIR__ . '/Customer.php';
+require_once __DIR__ . '/ChildFee.php';
+require_once __DIR__ . '/AdultFee.php';
+require_once __DIR__ . '/Charge.php';
 
-$type = new CustomerType('child');
-$customer = new Customer($type);
+/**
+ * @var Fee[]
+ */
+$fees = [new AdultFee(), new ChildFee()];
 
-echo $customer->fee();
+foreach ($fees as $fee) {
+    $charge = new Charge($fee);
+    echo $charge->yen()->getInt() . PHP_EOL;
+}

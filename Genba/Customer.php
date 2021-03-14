@@ -2,7 +2,6 @@
 
 class Customer
 {
-    const BASEFEE = 100;
     /**
      * @var CustomerType
      */
@@ -22,11 +21,11 @@ class Customer
     }
 
     private function childFee() {
-        return self::BASEFEE * 0.5;
+        return Fee::BASE_FEE * 0.5;
     }
 
     private function adultFee() {
-        return self::BASEFEE;
+        return Fee::BASE_FEE;
     }
 
 
