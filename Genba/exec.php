@@ -1,9 +1,9 @@
 <?php
 
 require_once __DIR__ . '/CustomerType.php';
+require_once __DIR__ . '/Customer.php';
 
 $type = new CustomerType('child');
+$customer = new Customer($type);
 
-if ($type->equal('child')) {
-    echo 'fee';
-}
+echo $customer->fee();
