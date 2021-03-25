@@ -2,6 +2,15 @@
 
 class Customer
 {
+    private string $first_name;
+    private string $last_name;
+    private string $postal_code;
+    private string $city;
+    private string $address;
+    private string $telephone;
+    private string $mail_address;
+    private bool $telephone_not_preferred;
+
     /**
      * @var CustomerType
      */
@@ -13,6 +22,14 @@ class Customer
     }
 
     /**
+     * @return string
+     */
+    public function fullName()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    /**
      * @return bool
      */
     private function isChild()
@@ -20,17 +37,20 @@ class Customer
         return $this->type->equal('child');
     }
 
-    private function childFee() {
+    private function childFee()
+    {
         return Fee::BASE_FEE * 0.5;
     }
 
-    private function adultFee() {
+    private function adultFee()
+    {
         return Fee::BASE_FEE;
     }
 
 
-    public function fee() {
-        if($this->isChild()) {
+    public function fee()
+    {
+        if ($this->isChild()) {
             return $this->childFee();
         }
 
