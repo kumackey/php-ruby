@@ -2,53 +2,32 @@
 
 class Customer
 {
-    private string $first_name;
-    private string $last_name;
-    private string $postal_code;
-    private string $city;
-    private string $address;
-    private string $telephone;
-    private string $mail_address;
-    private bool $telephone_not_preferred;
-
-    /**
-     * @var CustomerType
-     */
-    private $type;
+    private PersonName $person_name;
+    private Address $address;
+    private ContactMethod $contact_method;
+    private CustomerType $type;
 
     public function __construct(CustomerType $type)
     {
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
-    public function fullName()
-    {
-        return $this->first_name . ' ' . $this->last_name;
-    }
-
-    /**
-     * @return bool
-     */
-    private function isChild()
+    private function isChild(): bool
     {
         return $this->type->equal('child');
     }
 
-    private function childFee()
+    private function childFee(): string
     {
         return Fee::BASE_FEE * 0.5;
     }
 
-    private function adultFee()
+    private function adultFee(): string
     {
         return Fee::BASE_FEE;
     }
 
-
-    public function fee()
+    public function fee(): string
     {
         if ($this->isChild()) {
             return $this->childFee();
