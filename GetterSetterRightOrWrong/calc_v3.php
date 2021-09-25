@@ -82,11 +82,16 @@ class ItemOrder
     public function totalPrice(): int
     {
         $totalPrice = $this->unitPrice * $this->quantity;
-        if (3000 <= $totalPrice) {
+        if ($this->isTotalPriceDiscounted()) {
             $totalPrice = $totalPrice - 300;
         }
 
         return $totalPrice;
+    }
+
+    private function isTotalPriceDiscounted(): bool
+    {
+        return 3000 <= $this->unitPrice * $this->quantity;
     }
 
     private static function isUnitPriceDiscounted(int $quantity, int $unitPrice): bool

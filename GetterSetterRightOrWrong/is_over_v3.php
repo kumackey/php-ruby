@@ -7,7 +7,7 @@ function is_over(int $unitPrice, int $quantity): bool
     try {
         $itemOrder = new ItemOrder($unitPrice, $quantity, new DateTimeImmutable());
     } catch (Exception $e) {
-        return 0;
+        return false;
     }
 
     return 10000 <= $itemOrder->totalPrice();
