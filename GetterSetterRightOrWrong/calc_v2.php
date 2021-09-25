@@ -5,7 +5,7 @@
  * @param int $quantity
  * @return int エラーの場合は0を返す
  */
-function calcTotalPrice(int $unitPrice, int $quantity): int
+function calc_total_price(int $unitPrice, int $quantity): int
 {
     $itemOrder = new ItemOrder($unitPrice, $quantity, new DateTimeImmutable());
 
@@ -15,29 +15,31 @@ function calcTotalPrice(int $unitPrice, int $quantity): int
     }
 
     $totalPrice = $itemOrder->getUnitPrice() * $itemOrder->getQuantity();
-    if ($totalPrice >= 3000) {
+    if (3000 <= $totalPrice) {
         $totalPrice = $totalPrice - 300;
     }
 
     return $totalPrice;
 }
 
+// テスト
+
 // 仕様1: 単価*個数が返ってくること
-assert(calcTotalPrice(200, 4) === 800);
+assert(calc_total_price(200, 4) === 800);
 
 // 仕様2: 個数が5個以上なら単価は20円引きとなること
-assert(calcTotalPrice(200, 5) === 900);
+assert(calc_total_price(200, 5) === 900);
 
 // バグ: 合計額がマイナスになる!?
-echo calcTotalPrice(15, 10) . PHP_EOL;
+echo calc_total_price(15, 10) . PHP_EOL;
 
 // 仕様3: 単価が100円以下のときには割引しないこと
-assert(calcTotalPrice(100, 5) === 500);
+assert(calc_total_price(100, 5) === 500);
 
 // 仕様4: 合計額が3000円以上のときには合計額は300円引きとなること
-assert(calcTotalPrice(1000, 4) === 3700);
+assert(calc_total_price(1000, 4) === 3700);
 
-echo 'all green';
+echo 'all green' . PHP_EOL;
 
 
 class ItemOrder
