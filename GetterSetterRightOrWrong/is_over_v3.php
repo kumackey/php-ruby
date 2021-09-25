@@ -2,11 +2,6 @@
 
 require_once 'calc_v3.php';
 
-/**
- * @param int $unitPrice
- * @param int $quantity
- * @return bool
- */
 function is_over(int $unitPrice, int $quantity): bool
 {
     $itemOrder = new ItemOrder($unitPrice, $quantity, new DateTimeImmutable());

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @param int $unitPrice
- * @param int $quantity
- * @return int エラーの場合は0を返す
- */
 function calc_total_price(int $unitPrice, int $quantity): int
 {
     $itemOrder = new ItemOrder($unitPrice, $quantity, new DateTimeImmutable());
@@ -50,11 +45,6 @@ class ItemOrder
 
     private DateTimeImmutable $orderedAt;
 
-    /**
-     * @param int $unitPrice
-     * @param int $quantity
-     * @param DateTimeImmutable $orderedAt
-     */
     public function __construct(int $unitPrice, int $quantity, DateTimeImmutable $orderedAt)
     {
         if (5 <= $quantity && 100 < $unitPrice) {
