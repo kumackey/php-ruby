@@ -28,7 +28,7 @@ assert(calc_total_price(200, 5) === 900);
 // バグ: 合計額がマイナスになる!?
 echo calc_total_price(15, 10) . PHP_EOL;
 
-// 仕様4: 単価が100円以下のときには割引しないこと
+// 仕様4: 単価が100円以下のときには単価の値引きをしないこと
 assert(calc_total_price(10, 5) === 50);
 
 // 仕様5: 合計額が3000円以上のときには合計額は300円引きとなること
@@ -47,7 +47,7 @@ class ItemOrder
 
     public function __construct(int $unitPrice, int $quantity, DateTimeImmutable $orderedAt)
     {
-        if (5 <= $quantity && 100 < $unitPrice) {
+        if (self::isUnitPriceDiscounted($unitPrice, $quantity)) {
             $unitPrice = $unitPrice - 20;
         }
 
@@ -87,6 +87,11 @@ class ItemOrder
         }
 
         return $totalPrice;
+    }
+
+    private static function isUnitPriceDiscounted(int $quantity, int $unitPrice): bool
+    {
+        return 5 <= $quantity && 100 < $unitPrice;
     }
 }
 
