@@ -3,6 +3,14 @@
 function calc_total_price(int $unitPrice, int $quantity): int
 {
     $itemOrder = new ItemOrder($unitPrice, $quantity, new DateTimeImmutable());
+    if (!$itemOrder->validates()) {
+        return 0;
+    }
+
+    if (5 <= $itemOrder->getQuantity()) {
+        $discountedPrice = $itemOrder->getUnitPrice() - 20;
+        $itemOrder->setUnitPrice($discountedPrice);
+    }
 
     $itemOrderRepository = new ItemOrderRepository();
     if (!$itemOrderRepository->persist($itemOrder)) {
@@ -14,6 +22,12 @@ function calc_total_price(int $unitPrice, int $quantity): int
 
 // 仕様1: 単価*個数が返ってくること
 assert(calc_total_price(200, 4) === 800);
+
+// 仕様2: 単価がマイナスではエラーとなること
+assert(calc_total_price(-500, 4) === 0);
+
+// 仕様3: 個数が5個以上なら単価は20円引きとなること
+assert(calc_total_price(200, 5) === 900);
 
 echo 'all green' . PHP_EOL;
 
@@ -46,6 +60,16 @@ class ItemOrder
     public function getOrderedAt(): DateTimeImmutable
     {
         return $this->orderedAt;
+    }
+
+    public function validates(): bool
+    {
+        return 0 < $this->unitPrice && 0 < $this->quantity;
+    }
+
+    public function setUnitPrice(int $unitPrice)
+    {
+        $this->unitPrice = $unitPrice;
     }
 }
 

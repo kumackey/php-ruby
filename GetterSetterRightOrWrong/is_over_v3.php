@@ -4,7 +4,11 @@ require_once 'calc_v3.php';
 
 function is_over(int $unitPrice, int $quantity): bool
 {
-    $itemOrder = new ItemOrder($unitPrice, $quantity, new DateTimeImmutable());
+    try {
+        $itemOrder = new ItemOrder($unitPrice, $quantity, new DateTimeImmutable());
+    } catch (Exception $e) {
+        return 0;
+    }
 
     return 10000 <= $itemOrder->totalPrice();
 }

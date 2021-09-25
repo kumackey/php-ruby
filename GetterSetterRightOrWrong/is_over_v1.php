@@ -5,8 +5,11 @@ require_once 'calc_v1.php';
 function is_over(int $unitPrice, int $quantity): bool
 {
     $itemOrder = new ItemOrder($unitPrice, $quantity, new DateTimeImmutable());
+    if (!$itemOrder->validates()) {
+        return false;
+    }
 
-    // また同じメソッドを書いてる・・・
+    // また同じ処理を書いてる・・・
     if (5 <= $itemOrder->getQuantity() && 100 < $itemOrder->getUnitPrice()) {
         $discountedPrice = $itemOrder->getUnitPrice() - 20;
         $itemOrder->setUnitPrice($discountedPrice);
